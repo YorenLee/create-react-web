@@ -1,0 +1,1 @@
+export const TokenKey = 'Yoren-Lee-Token';

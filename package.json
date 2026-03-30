@@ -21,6 +21,7 @@
     "author": "李勇",
     "license": "ISC",
     "dependencies": {
+        "@ant-design/icons": "^6.1.1",
         "@babel/runtime": "^7.27.6",
         "@babel/runtime-corejs3": "^7.27.6",
         "@create-react-web/hook": "workspace:^1.0.0",
@@ -35,7 +36,7 @@
         "react-i18next": "^15.1.2",
         "react-router-config": "^5.1.1",
         "react-router-dom": "5.3.4",
-        "zustand": "^5.0.6"
+        "zustand": "^5.0.9"
     },
     "devDependencies": {
         "@babel/core": "^7.24.3",
@@ -50,7 +51,7 @@
         "@types/react-router-dom": "^5.3.3",
         "@typescript-eslint/eslint-plugin": "^6.21.0",
         "@typescript-eslint/parser": "^6.21.0",
-        "@vitejs/plugin-react": "^4.6.0",
+        "@vitejs/plugin-react": "^6.0.1",
         "babel-loader": "^8.3.0",
         "babel-plugin-import": "^1.13.8",
         "clean-webpack-plugin": "^4.0.0",
@@ -71,7 +72,7 @@
         "prettier": "^3.2.5",
         "style-loader": "^4.0.0",
         "typescript": "^5.8.3",
-        "vite": "^6.3.5",
+        "vite": "^8.0.3",
         "webpack": "^4.47.0",
         "webpack-bundle-analyzer": "^4.10.2",
         "webpack-cli": "^3.3.12",

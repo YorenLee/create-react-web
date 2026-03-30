@@ -57,18 +57,7 @@ const HomeLayout: React.FC<{ route: RouteConfig[] }> = function ({ route }) {
                 return <div onClick={() => preTopage(path)}>{label}</div>;
             })}
             <Layout>
-                <Header style={{ padding: 0, background: colorBgContainer }}>
-                    <Button
-                        type="text"
-                        icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                        onClick={() => setCollapsed(!collapsed)}
-                        style={{
-                            fontSize: '16px',
-                            width: 64,
-                            height: 64
-                        }}
-                    />
-                </Header>
+                <Header style={{ padding: 0, background: colorBgContainer }}></Header>
                 <RichRoute route={route} />
             </Layout>
         </Layout>

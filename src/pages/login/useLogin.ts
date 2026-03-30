@@ -3,8 +3,8 @@ import { useHistory, useLocation } from 'react-router-dom';
 import { PATH } from '@router/routes';
 import { githubCallback } from '@service/Login';
 import type { LoginState, LoginActions, LoginHandlers, GitHubUser } from './types';
-import axios from '@service/Axios';
 import jsCookie from 'js-cookie';
+import { TokenKey } from '@/constant/index';
 
 
 // GitHub OAuth 配置
@@ -80,11 +80,9 @@ export const useLogin = (params?: UseLoginParams): LoginState & LoginActions => 
             const token = responseData.token || responseData.accessToken || responseData.access_token;
             const userData: GitHubUser = responseData.user || responseData;
             
-            // 保存 token 到 cookie
             if (token) {
-                jsCookie.set('token', token, 7); // 7 天过期
+                jsCookie.set(TokenKey, token, { expires: 7 });
             }
-            axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
             // 保存用户信息到 localStorage
             localStorage.setItem('github_user', JSON.stringify(userData));
             
@@ -137,8 +135,7 @@ export const useLogin = (params?: UseLoginParams): LoginState & LoginActions => 
 
     // 处理登出
     const handleLogout = useCallback(() => {
-        // 清除 cookie
-        deleteCookie('token');
+        jsCookie.remove(TokenKey);
         // 清除 localStorage
         localStorage.removeItem('github_user');
         setState({

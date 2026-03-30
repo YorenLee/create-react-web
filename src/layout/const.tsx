@@ -11,5 +11,9 @@ export const NavList: NavItem[] = [
     {
         label: 'APP',
         path: PATH.APP
+    },
+    {
+        label: 'Chat',
+        path: PATH.CHAT
     }
 ];
