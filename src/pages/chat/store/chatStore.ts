@@ -39,6 +39,7 @@ interface ChatStore {
     error: string | null;
     sessionId: number | null;
     streamingContent: string;
+    historyLoaded: boolean;
 
     abortController: AbortController | null;
 
@@ -46,6 +47,7 @@ interface ChatStore {
     clearError: () => void;
     resetChat: () => void;
     sendMessage: (message: string) => Promise<void>;
+    fetchSessionMessages: (sessionId: number) => Promise<void>;
 }
 
 export const useChatStore = create<ChatStore>((set, get) => ({
@@ -54,6 +56,7 @@ export const useChatStore = create<ChatStore>((set, get) => ({
     error: null,
     sessionId: null,
     streamingContent: '',
+    historyLoaded: false,
     abortController: null,
 
     setSessionId: (id) => set({ sessionId: id }),
@@ -69,8 +72,43 @@ export const useChatStore = create<ChatStore>((set, get) => ({
             error: null,
             sessionId: null,
             streamingContent: '',
+            historyLoaded: false,
             abortController: null
         });
+    },
+
+    fetchSessionMessages: async (sessionId: number) => {
+        const { loading, historyLoaded } = get();
+        if (loading || historyLoaded) return;
+
+        set({ loading: true, error: null });
+
+        try {
+            const token = jsCookie.get(TokenKey);
+            const response = await fetch(`/api/agent/sessions/${sessionId}/messages`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            if (!response.ok) {
+                throw new Error(`加载历史消息失败: ${response.status}`);
+            }
+
+            const result = await response.json();
+            const data: Array<{ role: string; content: string; createdAt: string }> = result.data ?? result;
+
+            const messages: ChatMessage[] = data.map(msg => ({
+                role: msg.role as 'user' | 'assistant',
+                content: msg.content,
+                timestamp: new Date(msg.createdAt).getTime()
+            }));
+
+            set({ messages, sessionId, historyLoaded: true, loading: false });
+        } catch (err: any) {
+            set({
+                loading: false,
+                error: err.message || '加载历史消息失败'
+            });
+        }
     },
 
     sendMessage: async (message: string) => {
