@@ -1,11 +1,19 @@
 import React, { useRef, useEffect, useState, KeyboardEvent } from 'react';
 import { Input, Button, Typography, Alert, Spin } from 'antd';
 import { SendOutlined, RobotOutlined, UserOutlined } from '@ant-design/icons';
+import { Streamdown } from 'streamdown';
+import { code } from '@streamdown/code';
+import { math } from '@streamdown/math';
+import { cjk } from '@streamdown/cjk';
+import { mermaid } from '@streamdown/mermaid';
+import 'streamdown/styles.css';
 import { useChatStore } from '@/pages/chat/store/chatStore';
 import styles from './index.module.less';
 
 const { Text } = Typography;
 const { TextArea } = Input;
+
+const streamdownPlugins = { code, math, cjk, mermaid };
 
 const MessageBubble: React.FC<{
     role: 'user' | 'assistant';
@@ -21,8 +29,13 @@ const MessageBubble: React.FC<{
             </div>
             <div className={`${styles.bubble} ${isUser ? styles.userBubble : styles.assistantBubble}`}>
                 <div className={styles.messageContent}>
-                    {content}
-                    {isStreaming && <span className={styles.cursor}>|</span>}
+                    {isUser ? (
+                        content
+                    ) : (
+                        <Streamdown plugins={streamdownPlugins} isAnimating={isStreaming}>
+                            {content}
+                        </Streamdown>
+                    )}
                 </div>
             </div>
         </div>
