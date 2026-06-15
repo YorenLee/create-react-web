@@ -13,6 +13,7 @@ const ContextDemo = React.lazy(() => import('@pages/contextDemo'));
 const FileUpload = React.lazy(() => import('@pages/file-upload'));
 const LanguageSwitch = React.lazy(() => import('@pages/language'));
 const Chat = React.lazy(() => import('@pages/chat'));
+const ScrollytellingLayout = React.lazy(() => import('@pages/scrollytelling-nav'));
 const Scrollytelling = React.lazy(() => import('@pages/scrollytelling'));
 const ScrollytellingCSS = React.lazy(() => import('@pages/scrollytelling-css'));
 const ScrollytellingScroll = React.lazy(() => import('@pages/scrollytelling-scroll'));
@@ -29,8 +30,8 @@ export enum PATH {
     CHAT = '/chat',
     CHAT_SESSION = '/chat/:sessionId',
     SCROLLYTELLING = '/scrollytelling',
-    SCROLLYTELLING_CSS = '/scrollytelling-css',
-    SCROLLYTELLING_SCROLL = '/scrollytelling-scroll'
+    SCROLLYTELLING_CSS = '/scrollytelling/css',
+    SCROLLYTELLING_SCROLL = '/scrollytelling/scroll'
 }
 const layoutRoutes = [
     {
@@ -78,15 +79,21 @@ export const AppRoutes = [
     },
     {
         path: PATH.SCROLLYTELLING,
-        component: Scrollytelling
-    },
-    {
-        path: PATH.SCROLLYTELLING_CSS,
-        component: ScrollytellingCSS
-    },
-    {
-        path: PATH.SCROLLYTELLING_SCROLL,
-        component: ScrollytellingScroll
+        component: ScrollytellingLayout,
+        routes: [
+            {
+                path: PATH.SCROLLYTELLING_SCROLL,
+                component: ScrollytellingScroll
+            },
+            {
+                path: PATH.SCROLLYTELLING_CSS,
+                component: ScrollytellingCSS
+            },
+            {
+                path: PATH.SCROLLYTELLING,
+                component: Scrollytelling
+            }
+        ] as RouteConfig[]
     },
     {
         path: '/',

@@ -1,0 +1,169 @@
+/* ===== 浮动导航栏 ===== */
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 0.75rem 1.5rem;
+    background: rgba(15, 23, 42, 0.85);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border-bottom: 1px solid rgba(51, 65, 85, 0.4);
+    view-transition-name: scrolly-nav;
+}
+
+.navInner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.navTitle {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #94a3b8;
+    letter-spacing: 0.08em;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    white-space: nowrap;
+}
+
+.navItems {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.navBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    background: transparent;
+    color: #94a3b8;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    font-family: inherit;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.navBtn:hover {
+    background: rgba(51, 65, 85, 0.5);
+    color: #e2e8f0;
+    border-color: #475569;
+}
+
+.navBtnActive {
+    background: rgba(56, 189, 248, 0.12);
+    border-color: rgba(56, 189, 248, 0.4);
+    color: #38bdf8;
+}
+
+.navBtnActive:hover {
+    background: rgba(56, 189, 248, 0.18);
+    color: #38bdf8;
+    border-color: rgba(56, 189, 248, 0.5);
+}
+
+.navBadge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.15em 0.45em;
+    border-radius: 4px;
+    background: rgba(148, 163, 184, 0.15);
+    color: inherit;
+    letter-spacing: 0.03em;
+}
+
+.navBtnActive .navBadge {
+    background: rgba(56, 189, 248, 0.2);
+}
+
+.navLabel {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 0.75rem;
+}
+
+/* ===== View Transition 动画 ===== */
+
+/*
+ * 导航栏设置了 view-transition-name: scrolly-nav，
+ * 切换时它不参与过渡（保持不动）。
+ *
+ * 页面内容区的过渡效果在 ::view-transition 伪元素上定义。
+ */
+
+@keyframes vtSlideOutLeft {
+    to {
+        opacity: 0;
+        transform: translateX(-60px) scale(0.97);
+        filter: blur(4px);
+    }
+}
+
+@keyframes vtSlideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(60px) scale(0.97);
+        filter: blur(4px);
+    }
+}
+
+@keyframes vtSlideOutRight {
+    to {
+        opacity: 0;
+        transform: translateX(60px) scale(0.97);
+        filter: blur(4px);
+    }
+}
+
+@keyframes vtSlideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-60px) scale(0.97);
+        filter: blur(4px);
+    }
+}
+
+::view-transition-old(root) {
+    animation: vtSlideOutLeft 0.35s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+::view-transition-new(root) {
+    animation: vtSlideInRight 0.35s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* 导航栏：切换时保持不动，不做任何动画 */
+::view-transition-old(scrolly-nav),
+::view-transition-new(scrolly-nav) {
+    animation: none;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    .navInner {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .navItems {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .navItems::-webkit-scrollbar {
+        display: none;
+    }
+
+    .navBtn {
+        padding: 0.35rem 0.6rem;
+        font-size: 0.75rem;
+    }
+}
