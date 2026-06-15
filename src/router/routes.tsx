@@ -14,6 +14,7 @@ const FileUpload = React.lazy(() => import('@pages/file-upload'));
 const LanguageSwitch = React.lazy(() => import('@pages/language'));
 const Chat = React.lazy(() => import('@pages/chat'));
 const Scrollytelling = React.lazy(() => import('@pages/scrollytelling'));
+const ScrollytellingCSS = React.lazy(() => import('@pages/scrollytelling-css'));
 //  / 和/home 应该是同一个，并且点击home 路由应该是/
 export enum PATH {
     HOME = '/',
@@ -26,7 +27,8 @@ export enum PATH {
     LANGUAGE = '/language',
     CHAT = '/chat',
     CHAT_SESSION = '/chat/:sessionId',
-    SCROLLYTELLING = '/scrollytelling'
+    SCROLLYTELLING = '/scrollytelling',
+    SCROLLYTELLING_CSS = '/scrollytelling-css'
 }
 const layoutRoutes = [
     {
@@ -75,6 +77,10 @@ export const AppRoutes = [
     {
         path: PATH.SCROLLYTELLING,
         component: Scrollytelling
+    },
+    {
+        path: PATH.SCROLLYTELLING_CSS,
+        component: ScrollytellingCSS
     },
     {
         path: '/',

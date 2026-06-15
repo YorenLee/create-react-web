@@ -1,0 +1,392 @@
+/* ===== 全局容器 ===== */
+.container {
+    width: 100%;
+    background: #0f172a;
+    color: #e2e8f0;
+    font-family: 'Georgia', 'Noto Serif SC', serif;
+}
+
+/* ===== Hero ===== */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    text-align: center;
+    position: relative;
+}
+
+.heroTitle {
+    font-size: 4rem;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    margin: 0 0 1rem;
+    background: linear-gradient(to right, #e2e8f0, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.heroSubtitle {
+    font-size: 1.1rem;
+    color: #64748b;
+    letter-spacing: 0.1em;
+    margin: 0 0 1rem;
+}
+
+.heroBadge {
+    display: inline-block;
+    padding: 0.3em 1em;
+    border: 1px solid #334155;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    color: #38bdf8;
+    letter-spacing: 0.1em;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+}
+
+.scrollHint {
+    position: absolute;
+    bottom: 3rem;
+}
+
+.scrollArrow {
+    display: inline-block;
+    font-size: 1.5rem;
+    color: #475569;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(12px);
+    }
+    60% {
+        transform: translateY(6px);
+    }
+}
+
+/* ===== 每一组 ===== */
+.group {
+    width: 100%;
+}
+
+/*
+ * ★★★ 核心：timeline-scope ★★★
+ *
+ * view-timeline-name 默认只在自己的 scroll 祖先内可用。
+ * 左侧的 .image 和右侧的 .chapter 是兄弟子树，
+ * 必须在公共祖先 .groupInner 上声明 timeline-scope，
+ * 才能让 .image 引用 .chapter 创建的 view timeline。
+ */
+.groupInner {
+    display: flex;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    timeline-scope: --ch-0, --ch-1, --ch-2, --ch-3;
+}
+
+/* ===== 左侧 sticky 图片 ===== */
+.stickyLeft {
+    width: 50%;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.imageContainer {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+}
+
+.groupLabel {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.1em;
+    font-family: 'Helvetica Neue', sans-serif;
+    z-index: 5;
+}
+
+/* ----- 图片基础样式 ----- */
+.image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.06);
+}
+
+/*
+ * ★★★ 核心：animation-timeline 绑定到章节的 view timeline ★★★
+ *
+ * 每张图片的动画由对应章节在视口中的可见度驱动，
+ * 不需要任何 JS —— 浏览器合成线程直接执行。
+ */
+
+/* --- 第 1 张图：首章可见时显示，首章离开时淡出 --- */
+.image:nth-child(1) {
+    animation: scrollShowFirst linear both;
+    animation-timeline: --ch-0;
+}
+
+/* --- 中间图片：对应章节可见时淡入，离开时淡出 --- */
+.image:nth-child(2) {
+    animation: scrollShow linear both;
+    animation-timeline: --ch-1;
+}
+
+.image:nth-child(3) {
+    animation: scrollShow linear both;
+    animation-timeline: --ch-2;
+}
+
+.image:nth-child(4) {
+    animation: scrollShow linear both;
+    animation-timeline: --ch-3;
+}
+
+/* --- 最后一张图：淡入后不再淡出 --- */
+.image:last-child {
+    animation-name: scrollShowLast;
+}
+
+/*
+ * ★★★ 核心：三种 keyframes ★★★
+ *
+ * scrollShowFirst — 第一张图：初始可见 → 章节离开时淡出
+ * scrollShow     — 中间图片：章节进入时淡入 → 章节离开时淡出
+ * scrollShowLast — 最后一张：章节进入时淡入 → 保持可见
+ */
+@keyframes scrollShowFirst {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    80% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.06);
+    }
+}
+
+@keyframes scrollShow {
+    0% {
+        opacity: 0;
+        transform: scale(1.06);
+    }
+    20% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    80% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.06);
+    }
+}
+
+@keyframes scrollShowLast {
+    0% {
+        opacity: 0;
+        transform: scale(1.06);
+    }
+    20% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ===== 右侧叙事滚动 ===== */
+.narrativeRight {
+    width: 50%;
+    flex-shrink: 0;
+}
+
+/*
+ * ★★★ 核心：view-timeline-name ★★★
+ *
+ * 每个 .chapter 创建一个命名的 view progress timeline，
+ * 基于它在 scrollport 中的可见进度（0% 刚进入 → 100% 完全离开）。
+ */
+.chapter {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 3rem;
+    box-sizing: border-box;
+}
+
+.chapter:nth-child(1) {
+    view-timeline-name: --ch-0;
+}
+.chapter:nth-child(2) {
+    view-timeline-name: --ch-1;
+}
+.chapter:nth-child(3) {
+    view-timeline-name: --ch-2;
+}
+.chapter:nth-child(4) {
+    view-timeline-name: --ch-3;
+}
+
+/*
+ * ★★★ 核心：章节文字也用 scroll-driven animation ★★★
+ *
+ * animation-timeline: view() 表示用元素自身的 view timeline，
+ * 不需要命名 —— 元素进入视口时自动播放。
+ * animation-range: entry 0% cover 45% 表示动画在
+ * "元素刚进入" 到 "元素 45% 可见" 之间完成。
+ */
+.chapterContent {
+    max-width: 420px;
+    animation: revealContent linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 45%;
+}
+
+@keyframes revealContent {
+    from {
+        opacity: 0.15;
+        transform: translateY(40px);
+        filter: blur(4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+.chapterNumber {
+    display: block;
+    font-size: 0.8rem;
+    color: #475569;
+    letter-spacing: 0.2em;
+    font-family: 'Helvetica Neue', sans-serif;
+    margin-bottom: 1rem;
+}
+
+.chapterTitle {
+    font-size: 2rem;
+    font-weight: 400;
+    margin: 0 0 1.5rem;
+    line-height: 1.4;
+    color: #f1f5f9;
+}
+
+.chapterText {
+    font-size: 1.1rem;
+    line-height: 2;
+    color: #94a3b8;
+    margin: 0;
+}
+
+/* ===== 底部 ===== */
+.footer {
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+    font-size: 1.5rem;
+    color: #475569;
+    letter-spacing: 0.2em;
+}
+
+.footerSub {
+    font-size: 0.9rem;
+    color: #334155;
+    margin-top: 0.5rem;
+    letter-spacing: 0.1em;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 900px) {
+    .groupInner {
+        flex-direction: column;
+    }
+
+    .stickyLeft {
+        width: 100%;
+        height: 50vh;
+        padding: 1.5rem;
+    }
+
+    .narrativeRight {
+        width: 100%;
+    }
+
+    .chapter {
+        min-height: 80vh;
+        padding: 3rem 2rem;
+    }
+
+    .heroTitle {
+        font-size: 2.5rem;
+    }
+
+    .chapterTitle {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stickyLeft {
+        height: 40vh;
+        padding: 1rem;
+    }
+
+    .chapter {
+        min-height: 70vh;
+        padding: 2rem 1.5rem;
+    }
+
+    .heroTitle {
+        font-size: 2rem;
+        letter-spacing: 0.15em;
+    }
+
+    .chapterText {
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+}
