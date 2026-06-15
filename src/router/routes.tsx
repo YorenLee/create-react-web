@@ -15,6 +15,7 @@ const LanguageSwitch = React.lazy(() => import('@pages/language'));
 const Chat = React.lazy(() => import('@pages/chat'));
 const Scrollytelling = React.lazy(() => import('@pages/scrollytelling'));
 const ScrollytellingCSS = React.lazy(() => import('@pages/scrollytelling-css'));
+const ScrollytellingScroll = React.lazy(() => import('@pages/scrollytelling-scroll'));
 //  / 和/home 应该是同一个，并且点击home 路由应该是/
 export enum PATH {
     HOME = '/',
@@ -28,7 +29,8 @@ export enum PATH {
     CHAT = '/chat',
     CHAT_SESSION = '/chat/:sessionId',
     SCROLLYTELLING = '/scrollytelling',
-    SCROLLYTELLING_CSS = '/scrollytelling-css'
+    SCROLLYTELLING_CSS = '/scrollytelling-css',
+    SCROLLYTELLING_SCROLL = '/scrollytelling-scroll'
 }
 const layoutRoutes = [
     {
@@ -81,6 +83,10 @@ export const AppRoutes = [
     {
         path: PATH.SCROLLYTELLING_CSS,
         component: ScrollytellingCSS
+    },
+    {
+        path: PATH.SCROLLYTELLING_SCROLL,
+        component: ScrollytellingScroll
     },
     {
         path: '/',
