@@ -1,0 +1,284 @@
+/* ===== 全局容器 ===== */
+.container {
+    width: 100%;
+    background: #0f172a;
+    color: #e2e8f0;
+    font-family: 'Georgia', 'Noto Serif SC', serif;
+}
+
+/* ===== Hero 区域 ===== */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    text-align: center;
+    position: relative;
+}
+
+.heroTitle {
+    font-size: 4rem;
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    margin: 0 0 1rem;
+    background: linear-gradient(to right, #e2e8f0, #94a3b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.heroSubtitle {
+    font-size: 1.2rem;
+    color: #64748b;
+    letter-spacing: 0.15em;
+    margin: 0;
+}
+
+.scrollHint {
+    position: absolute;
+    bottom: 3rem;
+}
+
+.scrollArrow {
+    display: inline-block;
+    font-size: 1.5rem;
+    color: #475569;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(12px);
+    }
+    60% {
+        transform: translateY(6px);
+    }
+}
+
+/* ===== 每一组 ===== */
+.group {
+    width: 100%;
+    transition: background-color 0.6s ease;
+}
+
+.groupInner {
+    display: flex;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* ===== 左侧 sticky 图片 ===== */
+.stickyLeft {
+    width: 50%;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.imageContainer {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+}
+
+.image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.05);
+    transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+}
+
+.imageActive {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* 图片指示器圆点 */
+.imageIndicators {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    transition:
+        background 0.4s ease,
+        transform 0.4s ease;
+}
+
+.dotActive {
+    background: #fff;
+    transform: scale(1.3);
+}
+
+/* 组编号标签 */
+.groupLabel {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: 0.1em;
+    font-family: 'Helvetica Neue', sans-serif;
+    z-index: 2;
+}
+
+/* ===== 右侧叙事滚动 ===== */
+.narrativeRight {
+    width: 50%;
+    flex-shrink: 0;
+}
+
+.chapter {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 3rem;
+    box-sizing: border-box;
+}
+
+.chapterContent {
+    max-width: 420px;
+    opacity: 0.3;
+    transform: translateY(20px);
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s ease;
+}
+
+.chapterActive .chapterContent {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.chapterNumber {
+    display: block;
+    font-size: 0.8rem;
+    color: #475569;
+    letter-spacing: 0.2em;
+    font-family: 'Helvetica Neue', sans-serif;
+    margin-bottom: 1rem;
+}
+
+.chapterTitle {
+    font-size: 2rem;
+    font-weight: 400;
+    margin: 0 0 1.5rem;
+    line-height: 1.4;
+    color: #f1f5f9;
+}
+
+.chapterText {
+    font-size: 1.1rem;
+    line-height: 2;
+    color: #94a3b8;
+    margin: 0;
+}
+
+/* ===== 底部 ===== */
+.footer {
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+    font-size: 1.5rem;
+    color: #475569;
+    letter-spacing: 0.2em;
+}
+
+.footerSub {
+    font-size: 0.9rem;
+    color: #334155;
+    margin-top: 0.5rem;
+    letter-spacing: 0.1em;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 900px) {
+    .groupInner {
+        flex-direction: column;
+    }
+
+    .stickyLeft {
+        width: 100%;
+        height: 50vh;
+        padding: 1.5rem;
+    }
+
+    .narrativeRight {
+        width: 100%;
+    }
+
+    .chapter {
+        min-height: 80vh;
+        padding: 3rem 2rem;
+    }
+
+    .heroTitle {
+        font-size: 2.5rem;
+    }
+
+    .chapterTitle {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stickyLeft {
+        height: 40vh;
+        padding: 1rem;
+    }
+
+    .chapter {
+        min-height: 70vh;
+        padding: 2rem 1.5rem;
+    }
+
+    .heroTitle {
+        font-size: 2rem;
+        letter-spacing: 0.15em;
+    }
+
+    .chapterText {
+        font-size: 1rem;
+        line-height: 1.8;
+    }
+}
