@@ -1,0 +1,1107 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;600;700;800&display=swap');
+
+.page {
+    --ink: #18181b;
+    --muted: #6f6b76;
+    --paper: #f4f1ea;
+    --panel: #fffefa;
+    --purple: #7357ff;
+    --purple-dark: #4d38cb;
+    --mint: #bdf7dc;
+    --line: #ded9cf;
+    min-height: 100vh;
+    overflow: hidden;
+    color: var(--ink);
+    background:
+        linear-gradient(rgba(24, 24, 27, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(24, 24, 27, 0.025) 1px, transparent 1px), var(--paper);
+    background-size: 28px 28px;
+    font-family:
+        'Noto Sans SC',
+        -apple-system,
+        BlinkMacSystemFont,
+        'Segoe UI',
+        sans-serif;
+}
+
+.page *,
+.page *::before,
+.page *::after {
+    box-sizing: border-box;
+}
+
+.page button,
+.page input {
+    font: inherit;
+}
+
+.page code,
+.page output {
+    font-family: 'DM Mono', 'SFMono-Regular', Consolas, monospace;
+}
+
+.hero {
+    min-height: 720px;
+    height: 92vh;
+    max-height: 920px;
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(350px, 0.8fr);
+    align-items: center;
+    gap: clamp(2rem, 6vw, 7rem);
+    padding: 7.5rem max(5vw, calc((100vw - 1240px) / 2));
+    border-bottom: 1px solid var(--line);
+    background:
+        radial-gradient(circle at 78% 38%, rgba(115, 87, 255, 0.14), transparent 26%),
+        linear-gradient(120deg, rgba(255, 255, 255, 0.68), rgba(244, 241, 234, 0.72));
+}
+
+.brand {
+    position: absolute;
+    top: 2rem;
+    left: max(5vw, calc((100vw - 1240px) / 2));
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: var(--ink);
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: -0.02em;
+}
+
+.brandMark {
+    width: 2.25rem;
+    height: 2.25rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: white;
+    background: var(--ink);
+    font:
+        500 0.75rem/1 'DM Mono',
+        monospace;
+}
+
+.heroContent {
+    max-width: 760px;
+}
+
+.eyebrow,
+.sectionIndex {
+    margin: 0;
+    color: var(--purple-dark);
+    font:
+        500 0.73rem/1.2 'DM Mono',
+        monospace;
+    letter-spacing: 0.13em;
+}
+
+.hero h1 {
+    margin: 1.25rem 0 1.5rem;
+    max-width: 800px;
+    font-size: clamp(3.2rem, 6.3vw, 6.5rem);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.075em;
+}
+
+.hero h1 code {
+    display: inline-block;
+    padding: 0.07em 0.18em 0.1em;
+    border: 2px solid var(--ink);
+    border-radius: 0.16em;
+    box-shadow: 0.09em 0.09em 0 var(--purple);
+    font-size: 0.74em;
+    font-weight: 500;
+    letter-spacing: -0.06em;
+    transform: rotate(-1.5deg);
+    background: var(--mint);
+}
+
+.heroIntro {
+    max-width: 600px;
+    margin: 0;
+    color: #55515c;
+    font-size: clamp(1rem, 1.6vw, 1.3rem);
+    line-height: 1.8;
+}
+
+.primaryAction {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2.25rem;
+    padding: 1rem 1.2rem 1rem 1.4rem;
+    border-radius: 999px;
+    color: white;
+    background: var(--ink);
+    box-shadow: 0 8px 0 rgba(115, 87, 255, 0.25);
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+        transform 180ms ease,
+        box-shadow 180ms ease;
+}
+
+.primaryAction span {
+    width: 2rem;
+    height: 2rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--ink);
+    background: var(--mint);
+}
+
+.primaryAction:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 11px 0 rgba(115, 87, 255, 0.25);
+}
+
+.heroDemo {
+    position: relative;
+    min-width: 0;
+    padding: 1.35rem;
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    background: rgba(255, 254, 250, 0.82);
+    box-shadow: 0 30px 80px rgba(49, 42, 71, 0.12);
+    transform: rotate(2deg);
+}
+
+.heroDemo::before {
+    content: '';
+    position: absolute;
+    inset: -12px 18px 12px -12px;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--purple);
+    opacity: 0.14;
+}
+
+.heroLine {
+    height: 320px;
+    position: relative;
+    overflow: hidden;
+    padding: 0 1rem;
+    border-radius: 18px;
+    color: #28242e;
+    background: #ebe7df;
+    font:
+        500 clamp(1.6rem, 3vw, 2.8rem)/320px 'DM Mono',
+        monospace;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.baselineMarker {
+    width: 0;
+    height: 0;
+    position: relative;
+    z-index: 3;
+    display: inline-block;
+    vertical-align: baseline;
+    pointer-events: none;
+}
+
+.baselineMarker::after {
+    content: '';
+    width: 200vw;
+    position: absolute;
+    left: -100vw;
+    bottom: 0;
+    border-top: 1px dashed #ef4b6c;
+}
+
+.heroShapeOne,
+.heroShapeTwo {
+    width: 2.1em;
+    display: inline-block;
+    margin: 0 0.22em;
+    border-radius: 0.28em;
+    background: var(--purple);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
+.heroShapeOne {
+    height: 2.6em;
+    vertical-align: baseline;
+}
+
+.heroShapeTwo {
+    height: 1.55em;
+    vertical-align: middle;
+    background: #ffbd5d;
+}
+
+.heroDemo > p {
+    margin: 1.2rem 0 0.15rem;
+    color: var(--muted);
+    font-size: 0.88rem;
+    text-align: center;
+}
+
+.playgroundSection,
+.compareSection,
+.examplesSection,
+.rulesSection {
+    padding: 7.5rem max(5vw, calc((100vw - 1240px) / 2));
+}
+
+.sectionHeading {
+    display: grid;
+    grid-template-columns: minmax(145px, 0.23fr) 1fr;
+    align-items: start;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.sectionHeading h2 {
+    margin: -0.16em 0 0.7rem;
+    font-size: clamp(2.2rem, 4vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.055em;
+}
+
+.sectionHeading div > p {
+    max-width: 680px;
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.8;
+}
+
+.labGrid {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.33fr) minmax(0, 0.67fr);
+    overflow: hidden;
+    border: 1px solid #cdc7bd;
+    border-radius: 24px;
+    background: var(--panel);
+    box-shadow: 0 24px 65px rgba(44, 38, 56, 0.08);
+}
+
+.controlPanel {
+    padding: clamp(1.35rem, 2.5vw, 2.2rem);
+    border-right: 1px solid var(--line);
+    background: #ebe7df;
+}
+
+.controlGroup + .controlGroup {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(24, 24, 27, 0.1);
+}
+
+.controlTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.84rem;
+    font-weight: 700;
+}
+
+.controlTitle code,
+.controlTitle output {
+    color: var(--purple-dark);
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.optionGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem;
+}
+
+.optionButton {
+    min-width: 0;
+    padding: 0.75rem 0.4rem;
+    border: 1px solid #cec8be;
+    border-radius: 9px;
+    color: #4f4a55;
+    background: rgba(255, 255, 255, 0.55);
+    font:
+        500 0.72rem/1 'DM Mono',
+        monospace !important;
+    cursor: pointer;
+    transition: 150ms ease;
+}
+
+.optionButton:hover {
+    border-color: var(--purple);
+    color: var(--purple-dark);
+}
+
+.optionButtonActive {
+    border-color: var(--ink);
+    color: white;
+    background: var(--ink);
+    box-shadow: 3px 3px 0 var(--purple);
+    transform: translate(-1px, -1px);
+}
+
+.range {
+    width: 100%;
+    height: 4px;
+    display: block;
+    border-radius: 99px;
+    outline: none;
+    background: linear-gradient(to right, var(--purple), #c5bbed);
+    appearance: none;
+    cursor: pointer;
+}
+
+.range::-webkit-slider-thumb {
+    width: 18px;
+    height: 18px;
+    border: 4px solid white;
+    border-radius: 50%;
+    appearance: none;
+    background: var(--purple);
+    box-shadow: 0 0 0 1px var(--ink);
+}
+
+.range::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border: 4px solid white;
+    border-radius: 50%;
+    background: var(--purple);
+    box-shadow: 0 0 0 1px var(--ink);
+}
+
+.rangeLabels {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    color: #89848c;
+    font:
+        400 0.62rem/1.2 'DM Mono',
+        monospace;
+}
+
+.guideToggle {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 2rem;
+    color: #504b56;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.guideToggle input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.guideToggle > span {
+    width: 34px;
+    height: 20px;
+    position: relative;
+    display: inline-block;
+    border-radius: 99px;
+    background: #aaa4ad;
+    transition: background 160ms ease;
+}
+
+.guideToggle > span::after {
+    content: '';
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    border-radius: 50%;
+    background: white;
+    transition: transform 160ms ease;
+}
+
+.guideToggle input:checked + span {
+    background: var(--purple);
+}
+
+.guideToggle input:checked + span::after {
+    transform: translateX(14px);
+}
+
+.guideToggle input:focus-visible + span {
+    outline: 3px solid rgba(115, 87, 255, 0.3);
+    outline-offset: 2px;
+}
+
+.demoPanel {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    padding: clamp(1.35rem, 3vw, 2.4rem);
+}
+
+.demoPanelTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    color: #85808a;
+    font:
+        500 0.68rem/1 'DM Mono',
+        monospace;
+    letter-spacing: 0.09em;
+}
+
+.demoPanelTop > div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.demoPanelTop code {
+    padding: 0.55rem 0.7rem;
+    border-radius: 7px;
+    color: var(--purple-dark);
+    background: #efebff;
+    font-size: 0.72rem;
+    letter-spacing: 0;
+}
+
+.liveDot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #28c684;
+    box-shadow: 0 0 0 4px rgba(40, 198, 132, 0.14);
+}
+
+.mainStage {
+    min-height: 390px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    margin-top: 1.5rem;
+    border: 1px solid #e4dfd6;
+    border-radius: 16px;
+    background: linear-gradient(90deg, rgba(115, 87, 255, 0.035) 1px, transparent 1px), #f8f6f1;
+    background-size: 20px 20px;
+}
+
+.stageLine {
+    position: relative;
+    padding: 1rem;
+    color: #35313a;
+    font-size: clamp(1.2rem, 2.4vw, 2rem);
+    font-weight: 600;
+    line-height: 156px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.stageText {
+    letter-spacing: -0.03em;
+}
+
+.target {
+    width: clamp(112px, 17vw, 158px);
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    margin: 0 0.35em;
+    border: 1px solid #4d38cb;
+    border-radius: 10px;
+    color: white;
+    background: linear-gradient(145deg, #8a73ff, #6247ed);
+    box-shadow: 0 8px 18px rgba(79, 55, 198, 0.2);
+    transition:
+        height 180ms ease,
+        vertical-align 180ms ease;
+}
+
+.targetInner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.25;
+}
+
+.targetInner strong {
+    font-size: clamp(0.72rem, 1.25vw, 0.9rem);
+    letter-spacing: 0;
+}
+
+.targetInner small {
+    margin-top: 0.25rem;
+    color: rgba(255, 255, 255, 0.72);
+    font:
+        400 0.6rem/1 'DM Mono',
+        monospace;
+}
+
+.baselineLegend {
+    position: absolute;
+    right: 1rem;
+    bottom: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #c33c59;
+    font-size: 0.68rem;
+    transition: opacity 160ms ease;
+}
+
+.baselineLegend span {
+    width: 24px;
+    border-top: 1px dashed #ef4b6c;
+}
+
+.guidesHidden .baselineMarker::after,
+.guidesHidden .baselineLegend {
+    opacity: 0;
+}
+
+.explanation {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    margin-top: 1.35rem;
+    padding: 1.1rem 1.25rem;
+    border-left: 3px solid var(--purple);
+    background: #f2efff;
+}
+
+.explanationNumber {
+    color: var(--purple);
+    font:
+        500 1.2rem/1.2 'DM Mono',
+        monospace;
+}
+
+.explanation strong {
+    font-size: 0.92rem;
+}
+
+.explanation p {
+    margin: 0.35rem 0 0;
+    color: #655f6d;
+    font-size: 0.8rem;
+    line-height: 1.65;
+}
+
+.compareSection {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: #232129;
+    color: #f7f4ee;
+}
+
+.compareSection .sectionIndex {
+    color: #a999ff;
+}
+
+.compareSection .sectionHeading div > p {
+    color: #a9a4ae;
+}
+
+.compareGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.8rem;
+}
+
+.compareCard {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid #403d47;
+    border-radius: 14px;
+    background: #2b2931;
+}
+
+.compareHeading {
+    min-height: 72px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.9rem 1rem;
+    border-bottom: 1px solid #403d47;
+}
+
+.compareHeading code {
+    color: #c4b9ff;
+    font-size: 0.78rem;
+}
+
+.compareHeading span {
+    color: #aaa5af;
+    font-size: 0.68rem;
+}
+
+.compareStage {
+    height: 122px;
+    position: relative;
+    overflow: hidden;
+    color: #f8f5ef;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px), #242229;
+    background-size: 16px 16px;
+    font:
+        500 1.35rem/122px 'DM Mono',
+        monospace;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.compareTarget {
+    width: 43px;
+    height: 54px;
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    margin: 0 0.3em;
+    border-radius: 5px;
+    background: #8067ff;
+}
+
+.compareTarget span {
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    border-radius: 50%;
+    background: var(--mint);
+}
+
+.differenceCallout {
+    display: grid;
+    grid-template-columns: minmax(145px, 0.23fr) 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+    padding: 1.25rem 0 0;
+    border-top: 1px solid #403d47;
+    color: #c1bcc6;
+    font-size: 0.9rem;
+}
+
+.differenceCallout > span {
+    color: #f1bd65;
+    font:
+        500 0.72rem/1.5 'DM Mono',
+        monospace;
+}
+
+.differenceCallout p {
+    margin: 0;
+}
+
+.differenceCallout code {
+    color: #ddd6ff;
+}
+
+.examplesSection {
+    background: #e9fff5;
+}
+
+.exampleGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+}
+
+.exampleCard {
+    padding: clamp(1.4rem, 3vw, 2.2rem);
+    border: 1px solid #bddcca;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.72);
+}
+
+.exampleMeta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.exampleMeta span {
+    color: #31845e;
+    font:
+        500 0.7rem/1 'DM Mono',
+        monospace;
+    letter-spacing: 0.12em;
+}
+
+.exampleMeta code {
+    color: #4c695c;
+    font-size: 0.72rem;
+}
+
+.iconComparison,
+.imageComparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.9rem;
+}
+
+.iconComparison > div,
+.imageComparison > div {
+    min-width: 0;
+    padding: 1rem;
+    border: 1px solid #d6e8de;
+    border-radius: 12px;
+    background: white;
+}
+
+.iconComparison p,
+.imageComparison p {
+    margin: 0 0 1rem;
+    color: #858f89;
+    font:
+        400 0.66rem/1 'DM Mono',
+        monospace;
+}
+
+.iconLine {
+    font-size: clamp(0.92rem, 1.5vw, 1.2rem);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.statusIconBaseline,
+.statusIconMiddle {
+    width: 22px;
+    height: 22px;
+    display: inline-grid;
+    place-items: center;
+    border-radius: 50%;
+    color: white;
+    background: #36a873;
+    font-size: 0.72rem;
+    line-height: 1;
+}
+
+.statusIconBaseline {
+    vertical-align: baseline;
+}
+
+.statusIconMiddle {
+    vertical-align: middle;
+}
+
+.imageLine {
+    border-bottom: 6px solid #ffbf69;
+    background: #fff2df;
+    font-size: 1rem;
+    line-height: 72px;
+    white-space: nowrap;
+}
+
+.fakeImage {
+    width: 100%;
+    height: 62px;
+    display: inline-block;
+    color: white;
+    background:
+        radial-gradient(circle at 72% 28%, #ffdb75 0 9%, transparent 10%), linear-gradient(145deg, #6d5ae5, #947fff);
+    font:
+        500 0.68rem/62px 'DM Mono',
+        monospace;
+    text-align: center;
+}
+
+.exampleNote {
+    margin: 1.5rem 0 0;
+    color: #587064;
+    font-size: 0.82rem;
+    line-height: 1.75;
+}
+
+.rulesSection {
+    background: var(--paper);
+}
+
+.rulesGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid #cfc9bf;
+    border-bottom: 1px solid #cfc9bf;
+}
+
+.ruleCard {
+    min-width: 0;
+    padding: 2rem;
+}
+
+.ruleCard + .ruleCard {
+    border-left: 1px solid #cfc9bf;
+}
+
+.ruleCard > span {
+    color: var(--purple);
+    font:
+        500 0.75rem/1 'DM Mono',
+        monospace;
+}
+
+.ruleCard h3 {
+    margin: 1.25rem 0 0.8rem;
+    font-size: 1.08rem;
+}
+
+.ruleCard p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.84rem;
+    line-height: 1.8;
+}
+
+.syntaxCard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: clamp(2rem, 6vw, 6rem);
+    margin-top: 4rem;
+    padding: clamp(1.5rem, 4vw, 3.5rem);
+    border-radius: 20px;
+    color: #f8f5ef;
+    background: #232129;
+    box-shadow: 10px 10px 0 var(--purple);
+}
+
+.syntaxCard > div {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.syntaxCard code {
+    font-size: clamp(0.8rem, 1.4vw, 1rem);
+    line-height: 1.8;
+}
+
+.syntaxComment {
+    color: #827d87;
+    font:
+        400 0.7rem/1.4 'DM Mono',
+        monospace;
+}
+
+.syntaxCard p {
+    margin: 0;
+    color: #c0bbc5;
+    line-height: 1.9;
+}
+
+.syntaxCard strong {
+    color: var(--mint);
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.5rem max(5vw, calc((100vw - 1240px) / 2));
+    border-top: 1px solid var(--line);
+    color: #77727c;
+    background: #ebe7df;
+    font:
+        400 0.7rem/1.2 'DM Mono',
+        monospace;
+}
+
+.footer a {
+    color: var(--ink);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.footerLinks {
+    display: flex;
+    gap: 1.4rem;
+}
+
+@media (max-width: 980px) {
+    .hero {
+        height: auto;
+        max-height: none;
+        grid-template-columns: 1fr;
+        padding-top: 9rem;
+    }
+
+    .heroDemo {
+        width: min(100%, 620px);
+    }
+
+    .heroLine {
+        height: 260px;
+        line-height: 260px;
+    }
+
+    .labGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .controlPanel {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .controlPanel {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr 1fr;
+        gap: 1.25rem;
+    }
+
+    .controlGroup + .controlGroup {
+        margin-top: 0;
+        padding-top: 0;
+        border-top: 0;
+        border-left: 1px solid rgba(24, 24, 27, 0.1);
+        padding-left: 1.25rem;
+    }
+
+    .guideToggle {
+        grid-column: 1 / -1;
+        margin-top: 0;
+    }
+
+    .compareGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 720px) {
+    .hero {
+        min-height: 0;
+        padding: 8rem 1.2rem 4.5rem;
+    }
+
+    .brand {
+        left: 1.2rem;
+    }
+
+    .hero h1 {
+        font-size: clamp(2.7rem, 13vw, 4.5rem);
+    }
+
+    .heroDemo {
+        padding: 0.75rem;
+        border-radius: 18px;
+    }
+
+    .heroLine {
+        height: 210px;
+        border-radius: 12px;
+        font-size: 1.35rem;
+        line-height: 210px;
+    }
+
+    .playgroundSection,
+    .compareSection,
+    .examplesSection,
+    .rulesSection {
+        padding: 5rem 1.2rem;
+    }
+
+    .sectionHeading {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .sectionHeading h2 {
+        font-size: 2.5rem;
+    }
+
+    .labGrid {
+        border-radius: 17px;
+    }
+
+    .controlPanel {
+        display: block;
+    }
+
+    .controlGroup + .controlGroup {
+        margin-top: 1.7rem;
+        padding-top: 1.7rem;
+        padding-left: 0;
+        border-top: 1px solid rgba(24, 24, 27, 0.1);
+        border-left: 0;
+    }
+
+    .guideToggle {
+        margin-top: 1.7rem;
+    }
+
+    .demoPanelTop {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .mainStage {
+        min-height: 310px;
+    }
+
+    .stageLine {
+        margin-left: -40%;
+        margin-right: -40%;
+        font-size: 1.05rem;
+        line-height: 142px;
+    }
+
+    .target {
+        width: 104px;
+    }
+
+    .compareGrid,
+    .exampleGrid,
+    .rulesGrid,
+    .syntaxCard {
+        grid-template-columns: 1fr;
+    }
+
+    .differenceCallout {
+        grid-template-columns: 1fr;
+        gap: 0.6rem;
+    }
+
+    .ruleCard + .ruleCard {
+        border-top: 1px solid #cfc9bf;
+        border-left: 0;
+    }
+
+    .syntaxCard {
+        gap: 2rem;
+        box-shadow: 6px 6px 0 var(--purple);
+    }
+
+    .footer {
+        padding-right: 1.2rem;
+        padding-left: 1.2rem;
+    }
+
+    .footerLinks {
+        align-items: flex-end;
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page *,
+    .page *::before,
+    .page *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+    }
+}

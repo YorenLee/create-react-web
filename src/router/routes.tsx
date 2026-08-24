@@ -17,6 +17,8 @@ const ScrollytellingLayout = React.lazy(() => import('@pages/scrollytelling-nav'
 const Scrollytelling = React.lazy(() => import('@pages/scrollytelling'));
 const ScrollytellingCSS = React.lazy(() => import('@pages/scrollytelling-css'));
 const ScrollytellingScroll = React.lazy(() => import('@pages/scrollytelling-scroll'));
+const VerticalAlignLab = React.lazy(() => import('@pages/vertical-align'));
+const CascadeLayersLab = React.lazy(() => import('@pages/cascade-layers'));
 //  / 和/home 应该是同一个，并且点击home 路由应该是/
 export enum PATH {
     HOME = '/',
@@ -31,7 +33,9 @@ export enum PATH {
     CHAT_SESSION = '/chat/:sessionId',
     SCROLLYTELLING = '/scrollytelling',
     SCROLLYTELLING_CSS = '/scrollytelling/css',
-    SCROLLYTELLING_SCROLL = '/scrollytelling/scroll'
+    SCROLLYTELLING_SCROLL = '/scrollytelling/scroll',
+    VERTICAL_ALIGN = '/vertical-align',
+    CASCADE_LAYERS = '/css-cascade-layers'
 }
 const layoutRoutes = [
     {
@@ -94,6 +98,14 @@ export const AppRoutes = [
                 component: Scrollytelling
             }
         ] as RouteConfig[]
+    },
+    {
+        path: PATH.VERTICAL_ALIGN,
+        component: VerticalAlignLab
+    },
+    {
+        path: PATH.CASCADE_LAYERS,
+        component: CascadeLayersLab
     },
     {
         path: '/',
